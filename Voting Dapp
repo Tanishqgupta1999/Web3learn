@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity >=0.7.0 <0.9.0;
+
+contract votingcontract{
+    
+    address payable voter;
+
+mapping (address => uint)public votecount;
+
+constructor (){
+    voter = payable(msg.sender);
+    }
+    function votingbalance() public view returns(uint) {
+        return voter.balance;
+    }
+    function votingcasting() public payable {
+        require(votecount[voter] <1, "voting count exceeded");
+        votecount[voter]++;
+        voter.transfer(1 ether);
+    }
+}
+
+
