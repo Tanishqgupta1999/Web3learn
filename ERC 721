@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: GPL-3.0
+
+pragma solidity ^0.8.7;
+
+import "@openzeppelin/contracts@4.7.3/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts@4.7.3/access/Ownable.sol";
+import "@openzeppelin/contracts@4.7.3/utils/Counters.sol";
+
+contract Titantoken is ERC721, Ownable{
+
+    uint256 totalsupply=50000;
+    using Counters for Counters.Counter;
+
+    Counters.Counter private _tokenIdCounter;
+    constructor() ERC721("Titantoken", "TTK") {}
+
+    function _safeMint(address to) public onlyOwner {
+        uint256 tokencount = _tokenIdCounter.current();
+        require(tokencount < totalsupply, "No tokens left to be minted");
+        _tokenIdCounter.increment();
+        _safeMint(to, tokencount);
+    }
+}
