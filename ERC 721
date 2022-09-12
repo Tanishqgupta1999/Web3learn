@@ -14,10 +14,10 @@ contract Titantoken is ERC721, Ownable{
     Counters.Counter private _tokenIdCounter;
     constructor() ERC721("Titantoken", "TTK") {}
 
-    function _safeMint(address to) public onlyOwner {
+    function _safeMint(address youraddress) public onlyOwner {
         uint256 tokencount = _tokenIdCounter.current();
         require(tokencount < totalsupply, "No tokens left to be minted");
         _tokenIdCounter.increment();
-        _safeMint(to, tokencount);
+        _safeMint(youraddress, tokencount);
     }
 }
